@@ -10,6 +10,7 @@ export default class Layout extends React.Component{
   constructor(){
     super();
     this.name = "shub";
+    this.getTodos = this.getTodos.bind(this);
     this.state ={
       todos : ToDoStore.getAll()
     }
@@ -20,17 +21,25 @@ export default class Layout extends React.Component{
 
   componentWillMount(){
     console.log("component mounted");
-    ToDoStore.on('change', () => {
-      console.log("changed");
-      this.setState({
-        todos: ToDoStore.getAll()
-      })
-    });
+    ToDoStore.on('change',  this.getTodos);
+  }
+
+  getTodos(){
+    this.setState({
+      todos: ToDoStore.getAll()
+    })
+  }
+  componentWillUnmount(){
+      console.log("component unmounted");
+      ToDoStore.removeListener('change', this.getTodos)
+
   }
   createTodo(){
     ToDoActions.createTodo(Date.now());
   }
-
+  reloadTodo(){
+    ToDoActions.reloadTodo();
+  }
   render(){
     console.log(this.props);
     const {query} = this.props.location;
@@ -53,9 +62,11 @@ export default class Layout extends React.Component{
         <Link to ={'/'}>Home </Link>
         <h1>Contactus {this.getVal()}</h1>
         <p style ={inlineStyle}>data: {data} filter: {filter}</p>
-        <h3>Data from component</h3>
+        <h3>Data from compokknent</h3>
         <div className="row">{locationList}</div>
+        <h3> Actions implementation</h3>
         <button onClick = {this.createTodo.bind(this)}> Create</button>
+         <button onClick = {this.reloadTodo.bind(this)}> Reload</button>
         <h3> Data from Flux Stores </h3>
         <div className="row">{toDoStoreList}</div>
       </div>

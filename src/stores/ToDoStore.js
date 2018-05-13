@@ -43,6 +43,10 @@ class ToDoStore extends EventEmitter{
       case "CREATE_TODO": {
         this.createToDo(action.text);
       }
+      /*  case "RELOAD_TODO": { // for reload funcitonality , but create functionlity then will not exectue need to see
+        this.todos = action.todos;
+        this.emit('change');
+      } */
     }
   }
 

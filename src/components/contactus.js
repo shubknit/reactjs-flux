@@ -4,6 +4,7 @@ import {Link} from 'react-router';
 import AddressList from './AddressList';
 import StoresList from './StoresList';
 import ToDoStore from '../stores/ToDoStore';
+import * as ToDoActions from '../actions/ToDoActions';
 
 export default class Layout extends React.Component{
   constructor(){
@@ -26,6 +27,10 @@ export default class Layout extends React.Component{
       })
     });
   }
+  createTodo(){
+    ToDoActions.createTodo(Date.now());
+  }
+
   render(){
     console.log(this.props);
     const {query} = this.props.location;
@@ -50,6 +55,7 @@ export default class Layout extends React.Component{
         <p style ={inlineStyle}>data: {data} filter: {filter}</p>
         <h3>Data from component</h3>
         <div className="row">{locationList}</div>
+        <button onClick = {this.createTodo.bind(this)}> Create</button>
         <h3> Data from Flux Stores </h3>
         <div className="row">{toDoStoreList}</div>
       </div>

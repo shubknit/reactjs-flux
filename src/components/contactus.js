@@ -62,11 +62,11 @@ export default class Layout extends React.Component{
         <Link to ={'/'}>Home </Link>
         <h1>Contactus {this.getVal()}</h1>
         <p style ={inlineStyle}>data: {data} filter: {filter}</p>
-        <h3>Data from compokknent</h3>
+        <h3>Data from component</h3>
         <div className="row">{locationList}</div>
         <h3> Actions implementation</h3>
-        <button onClick = {this.createTodo.bind(this)}> Create</button>
-         <button onClick = {this.reloadTodo.bind(this)}> Reload</button>
+        <button onClick = {this.createTodo}> Create</button>
+         <button onClick = {this.reloadTodo}> Reload</button>
         <h3> Data from Flux Stores </h3>
         <div className="row">{toDoStoreList}</div>
       </div>

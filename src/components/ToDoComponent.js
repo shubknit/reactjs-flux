@@ -62,10 +62,8 @@ var ToDoComponent = React.createClass({
 	},
 
 	addItem : function(item){
-		var updatedList = this.state.todos;
-		updatedList.push(item);
 		this.setState({
-			todos : updatedList
+			todos : [...this.state.todos,item]
 		})
 	}
 });
